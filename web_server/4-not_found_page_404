@@ -1,46 +1,35 @@
 #!/usr/bin/env bash
-# Script that installs nginx and configures it to redirect /redirect_me and set up a custom 404 page.
-
-# Update and install nginx
+# script that install nginx and configure it to redirect to another page when
+# accessing the /redirect_me page.
 sudo apt update -y
 sudo apt install nginx -y
 
-# Create necessary directories and files with sudo
-sudo mkdir -p /var/www/html
-sudo touch /var/www/html/index.html
-sudo touch /var/www/html/404.html
+mkdir /etc/nginx/html
+touch /etc/nginx/html/index.html
+touch /etc/nginx/html/404.html
+echo "Holberton School" > /etc/nginx/html/index.html
+echo "Ceci n'est pas une page" > /etc/nginx/html/404.html
 
-# Write content to the files with sudo
-echo "Holberton School" | sudo tee /var/www/html/index.html
-echo "Ceci n'est pas une page" | sudo tee /var/www/html/404.html
-
-# Store configuration content in a variable and write to nginx config with sudo
-new_config=\ 
+# store configuration content
+new_config=\
 "server {
-    listen 80 default_server;
-    listen [::]:80 default_server;
-
-    root /var/www/html;
-    index index.html index.htm;
-
-    server_name _;
-
-    location / {
-        try_files \$uri \$uri/ =404;
-    }
-
-    location /redirect_me {
-        return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;
-    }
-
-    error_page 404 /404.html;
-    location = /404.html {
-        internal;
-    }
+        listen 80 default_server;
+        listen [::]:80 default_server;
+               root /var/www/html;
+        index index.html index.htm index.nginx-debian.html;
+        server_name _;
+        location / {
+                try_files \$uri \$uri/ =404;
+        }
+        location /redirect_me { 
+            return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;
+        }
+	error_page 404 /404.html;
+	location /404 {
+	    root /etc/nginx/html;
+	    internal;
+        }
 }
 "
-echo "$new_config" | sudo tee /etc/nginx/sites-available/default
-
-# Reload nginx to apply changes
-sudo nginx -s reload
-
+echo "$new_config" > /etc/nginx/sites-available/default
+sudo service nginx restart
