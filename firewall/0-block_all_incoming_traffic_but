@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+# Script to configure ufw to block all incoming traffic except for SSH, HTTP, and HTTPS
+
+sudo apt update
+sudo apt install ufw -y
+
+# Allow essential ports
+sudo ufw allow 22/tcp
+sudo ufw allow 80/tcp
+sudo ufw allow 443/tcp
+
+# Set default policies
+sudo ufw default deny incoming
+
+# Enable ufw
+sudo ufw enable
+
+# Display ufw status
+sudo ufw status
+
