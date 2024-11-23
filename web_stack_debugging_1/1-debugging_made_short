@@ -1,5 +1,5 @@
-#!/usr/bin/env bash
-# Fix the server to serve "Hello Holberton"
+erve "Hello Holberton" on port 80 without running Nginx service
 echo "Hello Holberton" > /var/www/html/index.html
-service apache2 start
+pkill nginx
+nohup busybox httpd -f -p 80 &
 
