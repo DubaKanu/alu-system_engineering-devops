@@ -1,8 +1,6 @@
-#!/usr/bin/env bash
-# This script installs and configures Nginx to serve "Hello Holberton" on port 80
-
-apt-get update -y && apt-get install -y nginx
-service nginx stop || true
+tops Nginx if running and prepares a web page to return HTTP 200
+apt-get update -y
+apt-get install -y nginx
 echo "Hello Holberton" > /var/www/html/index.html
-service nginx start
+service nginx stop
 
