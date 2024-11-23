@@ -1,5 +1,8 @@
-erve "Hello Holberton" on port 80 without running Nginx
+#!/usr/bin/env bash
+# This script installs and configures Nginx to serve "Hello Holberton" on port 80
+
+apt-get update -y && apt-get install -y nginx
+service nginx stop || true
 echo "Hello Holberton" > /var/www/html/index.html
-service nginx stop
-nohup busybox httpd -f -p 80 > /dev/null 2>&1 &
+service nginx start
 
