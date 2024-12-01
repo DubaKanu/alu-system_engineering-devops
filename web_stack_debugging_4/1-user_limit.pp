@@ -13,6 +13,6 @@ file_line { 'set_hard_limit':
 }
 
 exec { 'reload_pam_limits':
-  command => 'service sshd restart',
+  command => 'service ssh restart',
   path    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
 }
