@@ -11,3 +11,9 @@ file_line { 'increase_hard_limit':
   line  => 'holberton hard nofile 65536',
   match => '^holberton hard nofile',
 }
+
+exec { 'reload_limits':
+  command => 'sysctl -p',
+  path    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
+  onlyif  => 'test -f /etc/security/limits.conf',
+}
