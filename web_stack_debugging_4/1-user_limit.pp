@@ -1,5 +1,13 @@
-# This Puppet script adjusts the OS configuration to increase file descriptor limits for the holberton user.
-exec { 'adjust-file-descriptor-limits':
-  command => '/bin/echo "holberton soft nofile 4096\nholberton hard nofile 65536" >> /etc/security/limits.conf',
-  path    => ['/bin', '/sbin', '/usr/bin', '/usr/sbin'],
+# This Puppet manifest adjusts file descriptor limits for the holberton user.
+
+file_line { 'increase_soft_limit':
+  path  => '/etc/security/limits.conf',
+  line  => 'holberton soft nofile 4096',
+  match => '^holberton soft nofile',
+}
+
+file_line { 'increase_hard_limit':
+  path  => '/etc/security/limits.conf',
+  line  => 'holberton hard nofile 65536',
+  match => '^holberton hard nofile',
 }
