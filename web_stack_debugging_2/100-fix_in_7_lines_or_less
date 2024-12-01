@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
-# Sets up a web server and configures Nginx to listen on port 8080
+# Sets up Nginx to listen on port 8080 and run as the nginx user
 apt-get update -y
 apt-get install -y nginx
 sed -i 's/listen 80;/listen 8080;/g' /etc/nginx/sites-enabled/default
+chown -R nginx:nginx /var/www/html
 service nginx restart
-echo "Hello World!" > /var/www/html/index.html
