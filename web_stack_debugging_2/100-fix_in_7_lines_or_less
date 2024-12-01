@@ -1,5 +1,5 @@
-#!/bin/bash
-
-# This script checks Nginx status
-echo "Nginx is running as $(ps -o user= -p $(pgrep nginx | head -n 1))"
-echo "Nginx is listening on port 8080"
+#!/usr/bin/env bash
+apt-get update -y
+apt-get install -y nginx
+service nginx start
+echo "Hello World!" > /var/www/html/index.html
