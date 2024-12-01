@@ -1,6 +1,5 @@
-#!/usr/bin/env bash
-# Configure the container to run Nginx as the nginx user.
-sudo chmod -R 755 /etc/nginx/
-sed -i "s/80/8080/g" /etc/nginx/sites-available/default
-pkill apache2
-su nginx -c "service nginx restart"
+#!/bin/bash
+
+echo "Fetching data..."
+curl -O http://example.com/data.txt
+echo "Download complete!"
