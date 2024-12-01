@@ -1,0 +1,6 @@
+tops Nginx if running and prepares a web page to return HTTP 200
+apt-get update -y
+apt-get install -y nginx
+echo "Hello Holberton" > /var/www/html/index.html
+service nginx stop
+
